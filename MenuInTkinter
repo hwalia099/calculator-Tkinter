@@ -1,0 +1,17 @@
+from tkinter import *
+def f1():
+    print("this is a test fucn")
+root=   Tk()
+#Also me python we already have a class for menu,thus we can directly create its object
+#Entry is used to take input in tkinter
+myMenu=Menu(root)
+root.config(menu=myMenu)
+subMenu=Menu(myMenu)
+myMenu.add_cascade(label="File",menu=subMenu)
+subMenu.add_command(label="Project",command=f1)
+subMenu.add_separator()
+subMenu.add_command(label="Save",command=f1)
+newMenu=Menu(myMenu)
+myMenu.add_cascade(label="Edit",menu=newMenu)
+newMenu.add_command(label="undo",command=f1)
+root.mainloop()

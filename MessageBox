@@ -1,0 +1,16 @@
+MessageBox is nothing but simply a pop-up which will appear on screen with ceratin option as:
+ok,exit,clean etc
+
+CODE TO DISPLAY INFO:
+from tkinter import *
+import tkinter.messagebox
+
+root=Tk()
+
+tkinter.messagebox.showinfo("title","this is message")// box with headline title and message will pop-up
+response=tkinter.messagebox.askquestion("Question1","Coffe?")
+if response=='yes':
+    print("here is a coffe for you") //first tkinter messagebox will come after pressing ok question will come
+else:
+    print("you aint human")
+root.mainloop() 

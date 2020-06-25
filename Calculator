@@ -1,0 +1,86 @@
+from tkinter import *
+import tkinter.messagebox
+import parser
+import math
+import re
+
+i=0
+def getVariable(num):
+    global i
+    display.insert(i,num)
+    i+=1
+def clearAll():
+    display.delete(0,END)
+def undo():
+    entireString = display.get()
+    if entireString:
+        newString=entireString[:-1]
+        clearAll()
+        display.insert(0,newString)
+    else:
+        clearAll()
+        display.insert(0,"ERROR")
+def getOperator(operator):
+    length=len(operator)
+    global i
+    display.insert(i,operator)
+    i+=length
+def factorial():
+    global i
+    entireString1 =(display.get())
+    entireString=re.findall(r"[0-9]+$",entireString1)
+    l1=len(entireString[0])
+    display.delete(i-l1,END)
+    i=i-l1
+    print(l1)
+    result = math.factorial(int(entireString[0]))
+    print(result)
+    l=len(str(result))
+    print(l)
+    display.insert(i, result)
+    i+=l
+def calculate():
+    try:
+        entireString=display.get()
+        p=parser.expr(entireString).compile()
+        result=eval(p)
+        clearAll()
+        display.insert(0,result)
+    except Exception:
+        clearAll()
+        display.insert(0,"ERROR")
+root=Tk()
+
+root.title("cal")
+display=Entry(root)
+display.grid(row=1,columnspan=6,sticky=W+E)
+#tsicky=W+E means its spreading from left o right
+button=Button(root,text="1",command=lambda:getVariable(1)).grid(row=2,column=0)
+button=Button(root,text="2",command=lambda:getVariable(2)).grid(row=2,column=1)
+button=Button(root,text="3",command=lambda:getVariable(3)).grid(row=2 ,column=2)
+button=Button(root,text="4",command=lambda:getVariable(4)).grid(row=3,column=0)
+button=Button(root,text="5",command=lambda:getVariable(5)).grid(row=3,column=1)
+button=Button(root,text="6",command=lambda:getVariable(6)).grid(row=3,column=2)
+button=Button(root,text="7",command=lambda:getVariable(7)).grid(row=4,column=0)
+button=Button(root,text="8",command=lambda:getVariable(8)).grid(row=4,column=1)
+button=Button(root,text="9",command=lambda:getVariable(9)).grid(row=4,column=2)
+
+button=Button(root,text="AC",command=lambda:clearAll()).grid(row=5,column=0)
+button=Button(root,text="0",command=lambda:getVariable(0)).grid(row=5,column=1)
+button=Button(root,text="=",command=lambda:calculate()).grid(row=5,column=2)
+
+button=Button(root,text="+",command=lambda:getOperator("+")).grid(row=2,column=3)
+button=Button(root,text="-",command=lambda:getOperator("-")).grid(row=3,column=3)
+button=Button(root,text="*",command=lambda:getOperator("*")).grid(row=4,column=3)
+button=Button(root,text="/",command=lambda:getOperator("/")).grid(row=5,column=3 )
+
+button=Button(root,text="pi",command=lambda:getOperator("*3.14")).grid(row=2,column=4)
+button=Button(root,text="%",command=lambda:getOperator("%")).grid(row=3,column=4)
+button=Button(root,text="(",command=lambda:getOperator("(")).grid(row=4,column=4)
+button=Button(root,text="exp",command=lambda:getOperator("**")).grid(row=5,column=4)
+
+button=Button(root,text="<-",command=lambda:undo()).grid(row=2,column=5)
+button=Button(root,text="x!",command=lambda:factorial()).grid(row=3,column=5)
+button=Button(root,text=")",command=lambda:getOperator(")")).grid(row=4,column=5)
+button=Button(root,text="^2",command=lambda:getOperator("**2")).grid(row=5,column=5)
+root.mainloop()

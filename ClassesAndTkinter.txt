@@ -1,0 +1,17 @@
+from tkinter import *
+
+class MyButton:
+    def __init__(self,root):
+        frame=Frame(root)
+        frame.pack()
+        self.b = Button(frame, text="click kr na bhai", command=self.karkuch)
+        self.b.pack()
+
+        self.b2 = Button(frame, text="exit", command=frame.quit)
+        self.b2.pack(side=RIGHT)
+
+    def karkuch(self):
+        print("karta ho bhai")
+root=Tk()
+ob=MyButton(root)
+root.mainloop()

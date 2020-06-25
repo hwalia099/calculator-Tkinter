@@ -1,0 +1,8 @@
+relief=SUNKEN it will make a lable look more like a status bar 
+IT WILL CREATE GOOD LLOKING line above status
+anchor=W w here is west which specifies just side say E for right\
+
+code:
+
+status=Label(root,text="this is status",bd=2,anchor=W)
+status.pack(side=BOTTOM,fill=X)

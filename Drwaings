@@ -1,0 +1,10 @@
+from tkinter import *
+import tkinter.messagebox
+
+root=Tk()
+
+canvas=Canvas(root,width=200,height=400)
+canvas.pack()
+canvas.create_line(0,0,40,100)
+canvas.create_line(4,12,100,200,fill="blue")
+root.mainloop()
